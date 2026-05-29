@@ -4,22 +4,22 @@
 
 Студент:
 
-- Имя: Гусев Владислав Дмитриевич
-- Группа: 241-323
+- Имя: Integrate
+- Группа: DT
 
-Ветви:
+Работы:
 
-- [Основная ветка main](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/main)
-- [Лабораторная 1](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/lab1)
-- [Лабораторная 2](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/frontend/lab2)
-- [Лабораторная 3](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/frontend/lab3)
-- [Лабораторная 4](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/frontend/lab4)
-- [Лабораторная 5](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/frontend/lab5)
-- [Лабораторная 6](https://gitverse.ru/bitbytedive/WebApp-Integrate_Limit_Surd_Logs2x/content/backend/lab6)
+- [Лабораторная 1](lab1/)
+- [Лабораторная 2](frontend/lab2/)
+- [Лабораторная 3](frontend/lab3/)
+- [Лабораторная 4](frontend/lab4/)
+- [Лабораторная 5](frontend/lab5/)
+- [Backend / Лабораторная 9](backend/lab9/)
+- [ZIP-архив предыдущей версии backend](backend/backend-backup.zip)
 
 Полисы:
 
-- Лицензия: "LICENSE"
+- Лицензия: `LICENSE`
 - Кодекс поведения: `CODE_OF_CONDUCT.md`
 - Содействие: `CONTRIBUTING.md`
-- Безопасность: "SECURITY.md`
+- Безопасность: `SECURITY.md`
