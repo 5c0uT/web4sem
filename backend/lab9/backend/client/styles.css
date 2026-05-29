@@ -1,0 +1,369 @@
+:root {
+  --editor-page-background: #ececec;
+  --editor-text-color: #222222;
+  --editor-surface-color: #ffffff;
+  --editor-border-color: #999999;
+  --editor-border-strong-color: #777777;
+  --editor-muted-text-color: #444444;
+  --editor-note-text-color: #555555;
+  --editor-control-background: #efefef;
+  --editor-control-active-background: #dcdcdc;
+  --editor-control-ghost-background: #f7f7f7;
+  --projection-background: #ffffff;
+  --projection-shape-fill: #4b5563;
+  --projection-grid-minor: #666666;
+  --projection-grid-major: #000000;
+  --projection-crosshair: #ef4444;
+  --projection-canvas-background: linear-gradient(180deg, #ffffff 0%, #f7fafc 100%);
+  --projection-canvas-shadow: #eef2f7;
+  --scene-background: #f8f5ff;
+  --scene-light-color: #ffffff;
+  --scene-grid-minor: #b8a6ff;
+  --scene-grid-major: #e9ddff;
+  --scene-debug-minor: #7c3aed;
+  --scene-debug-major: #c4b5fd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--editor-page-background);
+  color: var(--editor-text-color);
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 12px;
+  display: grid;
+  grid-template-areas:
+    "workspace hero"
+    "workspace toolbar"
+    "workspace status";
+  column-gap: 16px;
+  row-gap: 0;
+}
+
+.hero,
+.toolbar,
+.status-panel,
+.panel,
+.dialog {
+  border: 1px solid var(--editor-border-color);
+  background: var(--editor-surface-color);
+}
+
+.hero,
+.toolbar,
+.status-panel {
+  background: var(--editor-surface-color);
+}
+
+.hero {
+  grid-area: hero;
+  margin-bottom: 0;
+  padding: 12px;
+  border-bottom: 0;
+}
+
+.hero h1,
+.dialog h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.hero__text,
+.dialog__text {
+  margin: 0;
+  color: var(--editor-muted-text-color);
+}
+
+.toolbar,
+.status-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px;
+  margin-bottom: 0;
+}
+
+.toolbar {
+  grid-area: toolbar;
+  flex-direction: column;
+  align-items: stretch;
+  border-top: 1px solid var(--editor-border-color);
+  border-bottom: 0;
+}
+
+.toolbar__group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.toolbar__group--actions {
+  margin-left: 0;
+}
+
+.toolbar__button,
+.field__control,
+.dialog-actions button,
+.model-actions button {
+  min-height: 36px;
+  border: 1px solid var(--editor-border-strong-color);
+  background: var(--editor-control-background);
+  padding: 6px 10px;
+}
+
+.toolbar__button.active,
+.toolbar__button.is-active,
+.dialog-actions button.primary {
+  background: var(--editor-control-active-background);
+}
+
+.toolbar__button--ghost {
+  background: var(--editor-control-ghost-background);
+}
+
+.toolbar__label {
+  font-weight: 700;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__control {
+  min-width: 132px;
+  padding: 0 10px;
+}
+
+.field__control--color {
+  width: 56px;
+  min-width: 56px;
+  padding: 2px;
+}
+
+.status-panel {
+  grid-area: status;
+  flex-direction: column;
+  align-items: stretch;
+  border-top: 1px solid var(--editor-border-color);
+}
+
+.status-panel__hint,
+.status-panel__meta-item {
+  margin: 0;
+}
+
+.status-panel__hint {
+  font-weight: 700;
+}
+
+.status-panel__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  color: var(--editor-muted-text-color);
+}
+
+.status-panel__list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--editor-muted-text-color);
+}
+
+.workspace {
+  grid-area: workspace;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: min(100%, 920px);
+  justify-self: center;
+  align-self: start;
+}
+
+.panel {
+  min-height: 420px;
+  padding: 8px;
+}
+
+.panel__title {
+  margin: 0 0 4px;
+  font-size: 18px;
+}
+
+.panel__note {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--editor-note-text-color);
+}
+
+.panel__canvas,
+.panel__three {
+  height: 360px;
+  display: block;
+  background: var(--projection-background);
+  border: 1px solid var(--editor-border-color);
+}
+
+.panel--drawing .panel__canvas {
+  width: 100%;
+  margin: 0 auto;
+  border: 2px solid var(--projection-shape-fill);
+  background: var(--projection-canvas-background);
+  box-shadow: inset 0 0 0 3px var(--projection-canvas-shadow);
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.panel--preview .panel__three {
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid var(--editor-border-strong-color);
+  background: var(--editor-surface-color);
+}
+
+.panel__three canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.dialog {
+  width: min(720px, calc(100vw - 24px));
+  padding: 0;
+}
+
+.dialog::backdrop {
+  background: rgba(0, 0, 0, 0.28);
+}
+
+.dialog-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+}
+
+.dialog-large {
+  min-height: 240px;
+}
+
+.dialog-form .field__control {
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.models-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.models-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: start;
+  border: 1px solid var(--editor-border-color);
+  background: var(--editor-control-ghost-background);
+  padding: 8px;
+}
+
+.model-name {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.model-meta {
+  font-size: 14px;
+  color: var(--editor-muted-text-color);
+}
+
+.model-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.empty-text {
+  padding: 12px 0;
+  color: var(--editor-muted-text-color);
+}
+
+@media (max-width: 1100px) {
+  .page {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "hero"
+      "toolbar"
+      "status"
+      "workspace";
+    row-gap: 10px;
+  }
+
+  .hero,
+  .toolbar,
+  .status-panel {
+    border: 1px solid var(--editor-border-color);
+  }
+
+  .toolbar {
+    flex-direction: row;
+    align-items: end;
+  }
+
+  .toolbar__group {
+    width: auto;
+  }
+
+  .workspace {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .models-list li {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pagination__info {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}

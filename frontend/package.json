@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "scripts": {
+    "server:lab5": "npm --prefix ./lab5 run server",
+    "lint:lab5": "npm --prefix ./lab5 run lint",
+    "install:lab5": "npm --prefix ./lab5 install"
+  }
+}

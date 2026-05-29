@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лабораторная работа 4 — 3D-редактор</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "../vendor/three.module.js"
+        }
+      }
+    </script>
+</head>
+
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>Лабораторная работа 4 — 3D-редактор</h1>
+      <p class="hero__text">
+        Построение низкополигональной модели по трем проекциям с помощью Space Carving,
+        отбраковки внутренних граней и окрашивания видимых поверхностей.
+      </p>
+    </header>
+
+    <section class="toolbar" aria-label="Панель инструментов">
+      <div class="toolbar__group">
+        <span class="toolbar__label">Режим</span>
+        <button id="shapeModeBtn" class="toolbar__button is-active" type="button">Форма</button>
+        <button id="paintModeBtn" class="toolbar__button" type="button">Покраска</button>
+      </div>
+
+      <div class="toolbar__group">
+        <label class="field">
+          <span class="toolbar__label">Цвет</span>
+          <input id="colorPicker" class="field__control field__control--color" type="color" value="#8b5cf6">
+        </label>
+      </div>
+
+      <div class="toolbar__group">
+        <label class="field">
+          <span class="toolbar__label">Размер сетки</span>
+          <select id="gridSizeSelect" class="field__control">
+            <option value="16" selected>16×16×16</option>
+            <option value="24">24×24×24</option>
+            <option value="32">32×32×32</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="toolbar__group toolbar__group--actions">
+        <button id="clearBtn" class="toolbar__button toolbar__button--ghost" type="button">Очистить все</button>
+      </div>
+    </section>
+
+    <section class="status-panel">
+      <p id="hintText" class="status-panel__hint"></p>
+      <ul class="status-panel__list">
+        <li>ЛКМ по проекциям: добавить пиксель / покрасить.</li>
+        <li>ПКМ по проекциям: удалить пиксель в режиме формы.</li>
+        <li>В режиме покраски можно кликать и по 3D-модели.</li>
+      </ul>
+    </section>
+
+    <main class="workspace">
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид сверху</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="topCanvas" class="panel__canvas" aria-label="Вид сверху"></canvas>
+      </section>
+
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид спереди</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="frontCanvas" class="panel__canvas" aria-label="Вид спереди"></canvas>
+      </section>
+
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид слева</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="leftCanvas" class="panel__canvas" aria-label="Вид слева"></canvas>
+      </section>
+
+      <section class="panel panel--preview">
+        <h2 class="panel__title">3D-просмотр</h2>
+        <p class="panel__note">Объемная модель</p>
+        <div id="threeRoot" class="panel__three" aria-label="Трехмерный просмотр"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+
+</html>

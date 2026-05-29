@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Лаба 5 - Сетевые запросы и json-server</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../vendor/three.module.js"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div class="page">
+    <header class="hero">
+      <h1>Лаба 5 - Сетевые запросы и json-server</h1>
+      <p class="hero__text">
+        Редактор сохраняет и загружает 3D-модели через json-server, сохраняя внешний вид и рабочую
+        логику интерфейса в стиле 4-й лабораторной работы.
+      </p>
+    </header>
+
+    <section class="toolbar" aria-label="Панель инструментов">
+      <div class="toolbar__group">
+        <span class="toolbar__label">Режим</span>
+        <button id="shapeModeBtn" class="toolbar__button active" type="button">Форма</button>
+        <button id="paintModeBtn" class="toolbar__button" type="button">Покраска</button>
+      </div>
+
+      <div class="toolbar__group">
+        <label class="field">
+          <span class="toolbar__label">Цвет</span>
+          <input id="colorPicker" class="field__control field__control--color" type="color" value="#8b5cf6">
+        </label>
+      </div>
+
+      <div class="toolbar__group">
+        <label class="field">
+          <span class="toolbar__label">Размер сетки</span>
+          <select id="gridSizeSelect" class="field__control">
+            <option value="16" selected>16×16×16</option>
+            <option value="24">24×24×24</option>
+            <option value="32">32×32×32</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="toolbar__group toolbar__group--actions">
+        <button id="resetModelBtn" class="toolbar__button toolbar__button--ghost" type="button">Сбросить</button>
+        <button id="saveBtn" class="toolbar__button" type="button">Сохранить</button>
+        <button id="saveAsBtn" class="toolbar__button" type="button">Сохранить как</button>
+        <button id="loadBtn" class="toolbar__button" type="button">Загрузить</button>
+      </div>
+    </section>
+
+    <section class="status-panel">
+      <p id="hintText" class="status-panel__hint"></p>
+      <div class="status-panel__meta">
+        <p class="status-panel__meta-item"><span class="toolbar__label">Текущая модель:</span> <span id="currentModelName">Новая модель</span></p>
+        <p class="status-panel__meta-item"><span class="toolbar__label">Статус:</span> <span id="statusText">Готово к работе</span></p>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид сверху</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="topCanvas" class="panel__canvas" aria-label="Вид сверху"></canvas>
+      </section>
+
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид спереди</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="frontCanvas" class="panel__canvas" aria-label="Вид спереди"></canvas>
+      </section>
+
+      <section class="panel panel--drawing">
+        <h2 class="panel__title">Вид слева</h2>
+        <p class="panel__note">Рабочая сетка</p>
+        <canvas id="leftCanvas" class="panel__canvas" aria-label="Вид слева"></canvas>
+      </section>
+
+      <section class="panel panel--preview">
+        <h2 class="panel__title">3D-просмотр</h2>
+        <p class="panel__note">Объемная модель</p>
+        <div id="threeRoot" class="panel__three" aria-label="Трехмерный просмотр"></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="saveDialog" class="dialog">
+    <form id="saveForm" method="dialog" class="dialog-form">
+      <h2>Сохранение модели</h2>
+      <p class="dialog__text">Введите имя, под которым модель будет сохранена на сервере.</p>
+      <label class="field">
+        <span class="toolbar__label">Имя модели</span>
+        <input id="modelNameInput" class="field__control" name="modelName" type="text" maxlength="80" required>
+      </label>
+      <div class="dialog-actions">
+        <button class="toolbar__button toolbar__button--ghost" value="cancel" type="submit">Отмена</button>
+        <button id="saveConfirmBtn" class="toolbar__button primary" value="confirm" type="submit">Сохранить</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="loadDialog" class="dialog">
+    <div class="dialog-form dialog-large">
+      <h2>Сохраненные модели</h2>
+      <p class="dialog__text">Выберите модель для загрузки или удаления.</p>
+      <div id="modelsEmptyText" class="empty-text" hidden>Сохраненных моделей пока нет.</div>
+      <ul id="modelsList" class="models-list"></ul>
+      <div class="dialog-actions">
+        <button id="closeLoadDialogBtn" class="toolbar__button toolbar__button--ghost" type="button">Закрыть</button>
+      </div>
+    </div>
+  </dialog>
+
+  <template id="modelItemTemplate">
+    <li class="model-item">
+      <div class="model-meta">
+        <div class="model-name"></div>
+        <div class="model-dates" data-role="createdAt"></div>
+        <div class="model-dates" data-role="updatedAt"></div>
+      </div>
+      <div class="model-actions">
+        <button class="toolbar__button" type="button" data-action="load">Открыть</button>
+        <button class="toolbar__button toolbar__button--ghost" type="button" data-action="delete">Удалить</button>
+      </div>
+    </li>
+  </template>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+
+</html>

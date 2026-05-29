@@ -1,0 +1,212 @@
+:root {
+  /* Цвета интерфейса */
+  --color-bg: #f5f5f5;
+  --color-panel: #ffffff;
+  --color-text: #111111;
+  --color-muted: #666666;
+  --color-border: #d0d0d0;
+
+  --color-btn-bg: #efefef;
+  --color-btn-border: #c0c0c0;
+  --color-btn-active-bg: #d9ecff;
+  --color-active-border: #6aa9ff;
+
+  --color-danger-border: rgba(176, 0, 32, 0.35);
+  --color-swatch-outline: #2b78ff;
+
+  --color-canvas-bg: #ffffff;
+
+  --color-hint-border: #e6d37a;
+  --color-hint-bg: #fff7d6;
+  --color-hint-text: #5a4b10;
+
+  /* Шрифты */
+  --font-body: Arial, "Segoe UI", Tahoma, sans-serif;
+  --font-mono: Consolas, "Liberation Mono", Menlo, monospace;
+
+  /* Размеры текста */
+  --fs-title: 20px;
+  --fs-subtitle: 13px;
+  --fs-ui: 13px;
+  --fs-status: 12px;
+  --fs-hint: 12px;
+
+  --fw-title: 700;
+
+  /* Размеры и отступы */
+  --content-max-width: 1100px;
+
+  --space-0: 0;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-24: 24px;
+
+  /* Макет */
+  --content-max-width: 960px;
+  --gap-layout: 12px;
+  --gap-tools: 8px;
+  --gap-row: 10px;
+
+  /* Границы и элементы */
+  --border-width: 1px;
+  --border-style: solid;
+  --border-style-dashed: dashed;
+
+  --btn-padding-y: 6px;
+  --btn-padding-x: 10px;
+  --swatch-size: 26px;
+
+  /* Параметры canvas */
+  --canvas-aspect-ratio: 16 / 9;
+  --canvas-touch-action: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: var(--space-0);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.top {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-16) var(--space-16) var(--space-0);
+}
+
+.title {
+  margin: var(--space-0);
+  font-size: var(--fs-title);
+  font-weight: var(--fw-title);
+}
+
+.subtitle {
+  margin: var(--space-6) 0 0;
+  font-size: var(--fs-subtitle);
+  color: var(--color-muted);
+}
+
+.layout {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--space-14) var(--space-16) var(--space-24);
+  display: grid;
+  gap: var(--gap-layout);
+}
+
+.panel,
+.canvasWrap {
+  background: var(--color-panel);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  padding: var(--space-12);
+}
+
+.panel__row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-row);
+  margin-bottom: var(--space-10);
+}
+
+.panel__row--wrap {
+  flex-wrap: wrap;
+}
+
+.tools {
+  display: flex;
+  gap: var(--gap-tools);
+  flex-wrap: wrap;
+}
+
+.btn {
+  appearance: none;
+  border: var(--border-width) var(--border-style) var(--color-btn-border);
+  background: var(--color-btn-bg);
+  color: var(--color-text);
+  padding: var(--btn-padding-y) var(--btn-padding-x);
+  font-size: var(--fs-ui);
+  cursor: pointer;
+}
+
+.btn[aria-pressed="true"],
+.btn.is-active {
+  background: var(--color-btn-active-bg);
+  border-color: var(--color-active-border);
+}
+
+.btn--danger {
+  border-color: var(--color-danger-border);
+  color: var(--color-danger);
+}
+
+.label {
+  font-size: var(--fs-ui);
+  color: var(--color-muted);
+}
+
+.palette {
+  display: flex;
+  gap: var(--gap-tools);
+  flex-wrap: wrap;
+}
+
+.swatch {
+  width: var(--swatch-size);
+  height: var(--swatch-size);
+  border: var(--border-width) var(--border-style) var(--color-btn-border);
+  background: var(--color-canvas-bg);
+  cursor: pointer;
+}
+
+.swatch[aria-pressed="true"],
+.swatch.is-active {
+  outline: 2px solid var(--color-swatch-outline);
+  outline-offset: 1px;
+}
+
+.status {
+  width: 100%;
+  overflow: auto;
+  padding: var(--space-6) var(--space-8);
+  border: var(--border-width) var(--border-style-dashed) var(--color-border);
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--fs-status);
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--canvas-aspect-ratio);
+  border: var(--border-width) var(--border-style) var(--color-border);
+  background: var(--color-canvas-bg);
+  touch-action: var(--canvas-touch-action);
+}
+
+.hint {
+  margin: var(--space-10) 0 0;
+  font-size: var(--fs-hint);
+  color: var(--color-muted);
+}
+
+.hint.is-active {
+  display: inline-block;
+  padding: var(--space-6) var(--space-8);
+  border: var(--border-width) var(--border-style) var(--color-hint-border);
+  background: var(--color-hint-bg);
+  color: var(--color-hint-text);
+}

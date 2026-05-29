@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch ./server/main.js",
+    "serve": "node ./server/main.js",
+    "lint": "eslint .",
+    "load-test": "node ./server/load-test.js"
+  },
+  "dependencies": {
+    "sqlite3": "^6.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.57.0",
+    "eslint": "^8.57.0",
+    "globals": "^15.15.0"
+  }
+}
